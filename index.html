@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Per Maddy 🩵 | 4 mesi di amicizia</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Pacifico&display=swap');
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Quicksand', sans-serif;
+      color: #31556b;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(255,255,255,.9) 0 35px, transparent 36px),
+        radial-gradient(circle at 90% 25%, rgba(255,255,255,.7) 0 45px, transparent 46px),
+        linear-gradient(135deg, #dff7ff, #bcecff, #eefaff);
+      overflow-x: hidden;
+    }
+
+    .cloud {
+      position: fixed;
+      width: 150px;
+      height: 55px;
+      background: rgba(255,255,255,.65);
+      border-radius: 60px;
+      filter: blur(1px);
+      z-index: -1;
+      animation: cloud 18s linear infinite;
+    }
+    .cloud::before, .cloud::after {
+      content: "";
+      position: absolute;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .cloud::before { width: 70px; height: 70px; left: 25px; top: -35px; }
+    .cloud::after { width: 85px; height: 85px; right: 15px; top: -45px; }
+
+    .c1 { top: 13%; left: -180px; animation-delay: -5s; }
+    .c2 { top: 62%; left: -220px; animation-duration: 25s; animation-delay: -13s; }
+
+    header {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 35px 20px;
+      text-align: center;
+    }
+
+    .hero {
+      max-width: 900px;
+      width: 100%;
+      padding: 50px 28px;
+      border: 2px solid rgba(255,255,255,.8);
+      border-radius: 35px;
+      background: rgba(255,255,255,.56);
+      box-shadow: 0 25px 80px rgba(64,145,183,.18);
+      backdrop-filter: blur(10px);
+    }
+
+    .bear {
+      font-size: 82px;
+      animation: float 3s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    .small-bears {
+      font-size: 30px;
+      letter-spacing: 8px;
+      margin: 10px 0 20px;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #4da8d1;
+      font-size: clamp(42px, 8vw, 78px);
+      margin: 5px 0;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.6;
+      max-width: 650px;
+      margin: 15px auto 30px;
+    }
+
+    .heart {
+      display: inline-block;
+      color: #78cfee;
+      animation: heartbeat 1.4s infinite;
+    }
+
+    .btn {
+      border: 0;
+      padding: 15px 25px;
+      border-radius: 999px;
+      background: #70c9ec;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(55,153,198,.25);
+      transition: .25s;
+    }
+    .btn:hover { transform: translateY(-3px) scale(1.03); }
+
+    main {
+      max-width: 950px;
+      margin: auto;
+      padding: 20px 20px 80px;
+    }
+
+    section {
+      margin: 35px 0;
+      padding: 38px 28px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 30px;
+      box-shadow: 0 15px 50px rgba(50,125,160,.12);
+    }
+
+    h2 {
+      text-align: center;
+      color: #459cc5;
+      font-size: 30px;
+      margin-top: 0;
+    }
+
+    .dedication {
+      font-size: 19px;
+      line-height: 2;
+      text-align: left;
+    }
+
+    .dedication strong { color: #368fb8; }
+
+    .timeline {
+      display: grid;
+      gap: 15px;
+    }
+
+    .moment {
+      padding: 18px;
+      border-radius: 20px;
+      background: #e9f9ff;
+      border-left: 6px solid #78cfee;
+    }
+
+    .qr-area {
+      text-align: center;
+    }
+
+    .qr-heart {
+      width: 250px;
+      height: 230px;
+      margin: 25px auto;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    /* Cuore decorativo attorno al QR: il QR resta integro e quindi più facile da scansionare. */
+    .qr-heart::before,
+    .qr-heart::after {
+      content: "♥";
+      position: absolute;
+      color: #86d5f3;
+      font-size: 105px;
+      opacity: .28;
+      z-index: 0;
+    }
+    .qr-heart::before { left: 25px; top: 42px; }
+    .qr-heart::after { right: 25px; top: 42px; }
+
+    #qrcode {
+      position: relative;
+      z-index: 2;
+      padding: 13px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 12px 35px rgba(46,132,170,.2);
+    }
+
+    #qrcode canvas {
+      border-radius: 8px;
+      display: block;
+    }
+
+    .qr-note {
+      font-size: 14px;
+      opacity: .8;
+    }
+
+    .music-box {
+      text-align: center;
+    }
+
+    audio {
+      width: min(650px, 100%);
+      margin-top: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 15px 60px;
+      font-weight: 600;
+    }
+
+    .floating {
+      position: fixed;
+      pointer-events: none;
+      bottom: -50px;
+      font-size: 24px;
+      animation: rise 7s linear forwards;
+      z-index: 10;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-12px) rotate(3deg); }
+    }
+
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); }
+      15% { transform: scale(1.22); }
+      30% { transform: scale(1); }
+    }
+
+    @keyframes cloud {
+      from { transform: translateX(0); }
+      to { transform: translateX(calc(100vw + 500px)); }
+    }
+
+    @keyframes rise {
+      from { transform: translateY(0) rotate(0deg); opacity: 0; }
+      15% { opacity: 1; }
+      to { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 35px 18px; }
+      section { padding: 28px 18px; }
+      .dedication { font-size: 17px; line-height: 1.8; }
+      .bear { font-size: 65px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+
+  <header>
+    <div class="hero">
+      <div class="bear">🧸</div>
+      <div class="small-bears">🧸 🩵 🧸</div>
+
+      <h1>Per Maddy</h1>
+
+      <p class="subtitle">
+        Per il mondo sono solo quattro mesi...
+        ma quando trovi una persona speciale, anche quattro mesi possono
+        contenere un mondo intero. <span class="heart">🩵</span>
+      </p>
+
+      <button class="btn" onclick="document.getElementById('lettera').scrollIntoView({behavior:'smooth'})">
+        Apri la nostra lettera 🧸
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section id="lettera">
+      <h2>Una lettera per te 🩵</h2>
+
+      <div class="dedication">
+        <p><strong>Maddy,</strong></p>
+
+        <p>
+          Quattro mesi fa non avrei mai immaginato che una persona così lontana
+          sarebbe riuscita a diventare così vicina a me. Eppure eccoci qui:
+          <strong>quattro mesi di noi, quattro mesi di amicizia, quattro mesi di ricordi.</strong>
+        </p>
+
+        <p>
+          A volte penso a quanto sia strano il modo in cui la vita fa incontrare
+          le persone. Ci sono persone che puoi avere accanto ogni giorno e che
+          magari non lasciano niente dentro di te. E poi ci sono persone lontane
+          chilometri che, senza nemmeno accorgersene, riescono a diventare casa.
+        </p>
+
+        <p>
+          <strong>Tu per me sei diventata una di quelle persone.</strong>
+        </p>
+
+        <p>
+          Non posso darti un abbraccio ogni volta che vorrei. Non posso essere
+          lì quando hai bisogno di qualcuno accanto. Non posso trasformare quei
+          chilometri in pochi passi. Però posso esserci. Posso ascoltarti,
+          ridere con te, parlare con te e ricordarti che, anche se siamo lontani,
+          dall'altra parte dello schermo c'è qualcuno che tiene davvero alla
+          nostra amicizia.
+        </p>
+
+        <p>
+          In questi quattro mesi abbiamo creato qualcosa che per me vale molto
+          più di quanto riesca a spiegare con delle semplici parole.
+          Ci sono messaggi che magari sembrano normali, battute che sembrano
+          stupide e momenti che sembrano piccoli... ma messi tutti insieme
+          diventano <strong>un pezzo importante della mia vita.</strong>
+        </p>
+
+        <p>
+          E forse è proprio questo che rende speciale un'amicizia:
+          non servono grandi promesse. Servono persone che scelgono di esserci.
+          E io sono davvero felice che, quattro mesi fa, sia iniziato questo
+          piccolo pezzo della nostra storia.
+        </p>
+
+        <p>
+          Se un giorno dovessimo riguardare questa pagina tra molto tempo,
+          spero che sorrideremo pensando a quanto eravamo diversi da quel
+          momento e a quante cose abbiamo passato insieme.
+        </p>
+
+        <p>
+          E se invece un giorno ti dimenticassi quanto sei importante per me,
+          torna qui e rileggi queste parole.
+          <strong>Non sono scritte per riempire una pagina. Sono scritte perché
+          alcune persone meritano di sapere quanto contano.</strong>
+        </p>
+
+        <p>
+          Maddy, grazie per questi quattro mesi.
+          Grazie per le risate, per i messaggi, per i momenti belli,
+          per quelli strani e semplicemente per essere entrata nella mia vita.
+        </p>
+
+        <p>
+          Non so dove ci porteranno i prossimi mesi, ma so una cosa:
+          <strong>non voglio che questi quattro mesi rimangano soltanto una data.</strong>
+          Voglio che rimangano un ricordo che, ogni volta che ci penseremo,
+          ci farà sorridere.
+        </p>
+
+        <p>
+          E magari un giorno la distanza non sarà più uno schermo,
+          ma soltanto una cosa che ci ricorderà da dove è iniziato tutto.
+        </p>
+
+        <p style="text-align:center;font-size:22px;">
+          Perché alcuni incontri durano un momento.<br>
+          <strong>Alcune amicizie, invece, diventano parte di te. 🩵</strong>
+        </p>
+
+        <p style="text-align:center;font-size:24px;">
+          Buon quarto mese, Maddy. 🧸🩵
+        </p>
+
+        <p style="text-align:center;font-size:24px;">
+          🧸 + 🧸 = 🩵
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Quattro mesi, tanti ricordi 🧸</h2>
+
+      <div class="timeline">
+        <div class="moment">
+          🩵 <strong>Il primo mese</strong><br>
+          L'inizio di qualcosa che nessuno dei due sapeva ancora quanto sarebbe
+          diventato importante.
+        </div>
+
+        <div class="moment">
+          🧸 <strong>Il secondo mese</strong><br>
+          Sempre più messaggi, più risate e sempre meno quella sensazione di
+          essere semplicemente due persone lontane.
+        </div>
+
+        <div class="moment">
+          ☁️ <strong>Il terzo mese</strong><br>
+          La distanza c'era ancora, ma sembrava un po' più piccola.
+        </div>
+
+        <div class="moment">
+          🩵 <strong>Il quarto mese</strong><br>
+          E siamo ancora qui. Questa volta con una pagina tutta per noi.
+        </div>
+      </div>
+    </section>
+
+    <section class="music-box">
+      <h2>La nostra canzone 🎧</h2>
+      <p>
+        Puoi mettere qui il tuo file audio personale di
+        <strong>“Bruciasse il cielo”</strong>.
+      </p>
+
+      <!-- Metti il file audio nella stessa cartella e chiamalo "bruciasse-il-cielo.mp3". -->
+      <audio controls>
+        <source src="bruciasse-il-cielo.mp3" type="audio/mpeg">
+        Il tuo browser non supporta l'audio.
+      </audio>
+
+      <p class="qr-note">
+        Il browser potrebbe richiedere un tuo clic prima di riprodurre l'audio.
+      </p>
+    </section>
+
+    <section class="qr-area">
+      <h2>Un piccolo cuore da scansionare 🩵</h2>
+
+      <p>
+        Questo QR porta direttamente al sito. Una volta pubblicato,
+        sostituisci il link nel codice con l'indirizzo reale della pagina.
+      </p>
+
+      <div class="qr-heart">
+        <div id="qrcode"></div>
+      </div>
+
+      <p class="qr-note">
+        🧸 Il QR è racchiuso nel cuore per mantenere il codice facilmente scansionabile.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Fatto con affetto per Maddy 🩵🧸<br>
+    <small>4 mesi di amicizia a distanza.</small>
+  </footer>
+
+  <!-- Libreria QR gratuita via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script>
+    /*
+      IMPORTANTE:
+      Prima di pubblicare il sito, cambia SITE_URL con il vero indirizzo del sito.
+      Esempio:
+      const SITE_URL = "https://tuonome.github.io/maddy/";
+    */
+    const SITE_URL = "https://example.com/maddy";
+
+    new QRCode(document.getElementById("qrcode"), {
+      text: SITE_URL,
+      width: 170,
+      height: 170,
+      colorDark: "#397f9e",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    // Piccoli cuori/orsetti che salgono ogni tanto.
+    const symbols = ["🩵", "🧸", "☁️", "♡"];
+
+    function createFloating() {
+      const el = document.createElement("div");
+      el.className = "floating";
+      el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.animationDuration = (5 + Math.random() * 4) + "s";
+      document.body.appendChild(el);
+
+      setTimeout(() => el.remove(), 9000);
+    }
+
+    setInterval(createFloating, 1300);
+  </script>
+</body>
+</html>
